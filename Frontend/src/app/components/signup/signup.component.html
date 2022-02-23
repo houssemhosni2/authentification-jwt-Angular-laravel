@@ -1,0 +1,116 @@
+<div class="backGround">
+  <div class="boxBackGround">
+    <fa-icon [icon]="cancel" class="cancelButton" (click)="removeSignup()"></fa-icon>
+    <h2 class="titleText">Create an Account and <br /> Shop for Fun</h2>
+    <div class="">
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="">
+          <input type="text" class="inputText"
+            id="firstName" aria-describedby="firstNameHelp" placeholder="First Name" formControlName="firstName" />
+          <div class="errorMessage">
+            <span *ngIf="
+                signupForm.get('firstName')!.errors?.required &&
+                (signupForm.get('firstName')!.touched ||
+                  signupForm.get('firstName')!.dirty)
+              ">
+              Enter your First Name.
+            </span>
+          </div>
+        </div>
+
+        <div class="">
+          <div class="">
+            <input type="text" class="inputText"
+              id="lastName" aria-describedby="lastNameHelp" placeholder="Last Name" formControlName="lastName" />
+            <div class="errorMessage">
+              <span *ngIf="
+                  signupForm.get('lastName')!.errors?.required &&
+                  (signupForm.get('lastName')!.touched ||
+                    signupForm.get('lastName')!.dirty)
+                ">
+                Enter your Last Name.
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="">
+          <input type="email" class="inputText" id="Email"
+            aria-describedby="emailHelp" placeholder="Email" formControlName="email" />
+          <div class="errorMessage">
+            <span *ngIf="
+                signupForm.get('email')!.errors?.required &&
+                (signupForm.get('email')!.touched ||
+                  signupForm.get('email')!.dirty)
+              ">
+              Enter your Email Address.
+            </span>
+            <span *ngIf="
+                signupForm.get('email')!.errors?.email &&
+                (signupForm.get('email')!.touched ||
+                  signupForm.get('email')!.dirty)
+              ">
+              Enter a valid Email Address.
+            </span>
+          </div>
+        </div>
+
+        <div class="" formGroupName="passwordGroup">
+          <div>
+            <input type="password" name="password"
+              class="inputText" id="Password"
+              placeholder="Password" formControlName="password" />
+            <div class="errorMessage">
+              <span *ngIf="
+                  signupForm.get('passwordGroup.password')!.errors?.required &&
+                  (signupForm.get('passwordGroup.password')!.touched ||
+                    signupForm.get('passwordGroup.password')!.dirty)
+                ">
+                Enter a password.
+              </span>
+              <span *ngIf="
+                  signupForm.get('passwordGroup.password')!.errors?.minlength &&
+                  (signupForm.get('passwordGroup.password')!.touched ||
+                    signupForm.get('passwordGroup.password')!.dirty)
+                ">
+                Password must be 6 characters long.
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <input type="password" name="password_confirmation"
+              class="inputText" id="password_confirmation"
+              placeholder="Confirm Password" formControlName="password_confirmation" />
+            <div class="errorMessage">
+              <span *ngIf="
+                  signupForm.get('passwordGroup.password_confirmation')!.errors?.required &&
+                  (signupForm.get('passwordGroup.password_confirmation')!.touched ||
+                    signupForm.get('passwordGroup.password_confirmation')!.dirty)
+                ">
+                Confirm your password.
+              </span>
+              <span *ngIf="
+                  signupForm.get('passwordGroup')!.errors?.match && !(signupForm.get('passwordGroup.password_confirmation')!.errors?.required)
+                ">
+                Password must match.
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <button [disabled]="!signupForm.valid" type="submit" class="buttonEnable"
+          [ngClass]="{
+            buttonEnable: signupForm.valid,
+            'bg-orange-300': !signupForm.valid
+          }">
+          Sign Up
+        </button>
+        <div class="text-xs">
+          Already have an account?
+          <a href="#" (click)="addLogin($event)" class="link">Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
